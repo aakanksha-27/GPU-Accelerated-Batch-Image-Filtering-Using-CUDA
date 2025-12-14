@@ -1,12 +1,11 @@
 # GPU-Accelerated-Batch-Image-Filtering-Using-CUDA
 
-# GPU-Accelerated Batch Image Processing using CUDA
-
 ## Overview
 This project demonstrates GPU-accelerated image processing on hundreds of small images using CUDA. The pipeline applies Gaussian blur using NVIDIA NPP and Sobel edge detection using a custom CUDA kernel.
 
 ## Dataset
 We use a subset of the MNIST handwritten digits dataset (grayscale images, 256x256), processing 500 images in a single execution.
+
 Link: https://archive-beta.ics.uci.edu/dataset/683/mnist+database+of+handwritten+digits
 
 ## GPU Computation
