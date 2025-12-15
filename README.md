@@ -30,37 +30,34 @@ Note: This project was executed and tested in a Google Colab CUDA environment.
 The run.sh script documents the expected execution flow.
 
 ## Output
-Processed images are written to data/output/.
-Execution logs and timing information are saved in logs/run_log.txt.
+Filtered images are written to: data/output/
+Execution logs and timing information are saved in: logs/run_log.txt
+
+Although only one representative output image is visualized, the pipeline processes** all images in the batch** during execution.
 
 ## Design Decisions and Lessons Learned
 
-This project was designed to demonstrate batch GPU image processing
-rather than single-image acceleration. MNIST was chosen because it
-contains hundreds of small images, which allows efficient batching
-and highlights GPU throughput advantages.
+This project was designed to demonstrate **batch GPU image processing**, rather than single-image acceleration. MNIST was selected because it contains hundreds of small images, which allows efficient batching and highlights GPU throughput advantages.
 
 A CUDA-accelerated pipeline was implemented using CuPy to:
-- Transfer image batches to GPU memory
-- Apply element-wise and convolution-style operations in parallel
-- Return results back to host for visualization
+- Performing Gaussian filtering using NVIDIA NPP to leverage optimized GPU primitives
+- Implementing a custom CUDA kernel for Sobel edge detection to demonstrate kernel-level GPU programming
+- Batching image transfers to reduce PCIe overhead
 
 Key challenges included:
-- Ensuring GPU memory transfers were batched efficiently
-- Verifying GPU execution in a non-native environment (Colab)
-- Balancing simplicity with meaningful computation
+- Ensuring GPU memory transfers were batched efficiently between host and device
+- Verifying GPU execution in a non-native environment (Google Colab)
+- Balancing simplicity with meaningful GPU computation
 
-This project reinforced the importance of batching workloads on GPUs
-and understanding memory transfer costs relative to computation.
+This project reinforced the importance of **batching workloads on GPUs** and understanding the performance trade-offs between computation and memory transfer.
 
 ## Proof of GPU Execution
 
-All experiments were executed on Google Colab with an NVIDIA GPU.
-Screenshots showing GPU availability, code execution, and image filtering
-results are available in the `screenshots/` directory.
+All experiments were executed on **Google Colab with an NVIDIA GPU**.
+The repository includes screenshots showing:
+- GPU availability (nvidia-smi)
+- Successful CUDA execution
+- Input and output image filtering results
+These artifacts are available in the screenshots/ directory.
 
-The project processes hundreds of MNIST images in a single execution
-using CUDA-accelerated operations via CuPy.
-
-Although only one sample image is visualized, the program processes
-the full MNIST dataset batch (500+ images) in a single GPU execution.
+Although only one sample image is visualized, the program processes **entire batch of 500+ MNIST images** in a single GPU execution using CUDA-accelerated operations.
