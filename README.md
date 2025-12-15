@@ -27,3 +27,12 @@ Execution logs and timing information are saved in logs/run_log.txt.
 - Managing device memory for batch image processing
 - Combining CUDA libraries with custom kernels
 - Performance benefits of GPU parallelism for image workloads
+
+## Proof of GPU Execution
+
+All experiments were executed on Google Colab with an NVIDIA GPU.
+Screenshots showing GPU availability, code execution, and image filtering
+results are available in the `screenshots/` directory.
+
+The project processes hundreds of MNIST images in a single execution
+using CUDA-accelerated operations via CuPy.
